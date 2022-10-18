@@ -1,0 +1,34 @@
+{
+  "name": "lista-de-regalos-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MartinB1989/lista-de-regalos-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MartinB1989/lista-de-regalos-back/issues"
+  },
+  "homepage": "https://github.com/MartinB1989/lista-de-regalos-back#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "faker": "^6.6.6"
+  }
+}
