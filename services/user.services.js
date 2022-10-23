@@ -1,5 +1,5 @@
 const { faker } = require('@faker-js/faker');
-
+const { boom } = require('@hapi/boom')
 class UserService {
 
   constructor () {
@@ -20,7 +20,7 @@ class UserService {
     }
   }
 
-  create (data) {
+  async create (data) {
     const newUser = {
       id: faker.datatype.uuid(),
       ...data
@@ -29,20 +29,39 @@ class UserService {
     return newUser
   }
 
-  find () {
+  async find () {
     return this.users
   }
 
-  findOne (id) {
-    return this.users.find(item => item.id === id)
+  async findOne (id) {
+    // const name = getAlgo() this line generate a error
+    const user = this.users.find(item => item.id === id)
+    if (!user) {
+      throw boom.notFound('user not found')
+    }
+    return user
   }
 
-  update () {
-
+  async update (id, changes) {
+    const index = this.users.findIndex(item => item.id === id)
+    if (index) {
+      throw boom.notFound('product not found')
+    }
+    const user = this.users[index]
+    this.users[index] = {
+      ...user,
+      ...changes
+    }
+    return this.users[index]
   }
 
-  delete () {
-
+  async delete (id) {
+    const index = this.users.findIndex(item => item.id === id)
+    if (index) {
+      throw boom.notFound('product not found')
+    }
+    this.users.splice(index, 1)
+    return { id }
   }
 }
 
