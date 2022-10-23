@@ -1,5 +1,5 @@
 const { faker } = require('@faker-js/faker');
-const { boom } = require('@hapi/boom')
+const boom = require('@hapi/boom')
 class UserService {
 
   constructor () {
@@ -34,7 +34,7 @@ class UserService {
   }
 
   async findOne (id) {
-    // const name = getAlgo() this line generate a error
+    // const name = getAlgo() // this line generate a error
     const user = this.users.find(item => item.id === id)
     if (!user) {
       throw boom.notFound('user not found')
