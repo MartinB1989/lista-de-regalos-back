@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const UserService = require('../services/user.services')
-
+const { validatorHandler } = require('../middleware/validatorHandler')
+const { createUserSchema, getUserSchema } = require('../schemas/user.schema')
 const service = new UserService()
 
 router.get('/', async (req, res) => {
@@ -9,7 +10,9 @@ router.get('/', async (req, res) => {
   res.json(users)
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id',
+validatorHandler(getUserSchema, 'params'),
+async (req, res, next) => {
   try {
     const { id } = req.params
     const user = await service.findOne(id)
@@ -19,7 +22,9 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/',
+validatorHandler(createUserSchema, 'body'),
+async (req, res) => {
   const body = req.body
   const user = await service.create(body)
   res.status(201).json({
